@@ -42,7 +42,7 @@ public class Actividad {
 		this.fecha = fecha;
 	}
 
-	public Institucion(long id, String nombre,String  fecha,String tipoActividad ) {
+	public Actividad(long id, String nombre,String  fecha,String tipoActividad ) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
