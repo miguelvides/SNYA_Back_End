@@ -1,6 +1,6 @@
 package com.gestion.SNYA.modelo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,25 +11,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @ToString
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Institucion {
+
+
+public class Donante {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Integer idInstitucion;
+	Integer idDoanante;
 	String nombre;
-	String tipo_institucion;
-	Double presupuesto_institucion;
-	Date fecha_ingreso;
-	
-
+	String institucion_donante;
+	String actividad_donante; 
+	Date fecha_inscripcion;
 	
 	
-	
-
 
 }
