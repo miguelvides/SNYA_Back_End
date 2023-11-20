@@ -1,0 +1,9 @@
+com\gestion\SNYA\servicio\IInstitucionServicio.class
+com\gestion\SNYA\repositorio\InstitucionRepositorio.class
+com\gestion\SNYA\Application.class
+com\gestion\SNYA\controlador\InstitucionControlador.class
+com\gestion\SNYA\modelo\Institucion.class
+com\gestion\SNYA\servicio\InstitucionServicio.class
+com\gestion\SNYA\modelo\Presupuesto.class
+com\gestion\SNYA\modelo\Actividad.class
+com\gestion\SNYA\modelo\Donante.class
