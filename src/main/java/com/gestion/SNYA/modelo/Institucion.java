@@ -26,6 +26,11 @@ public class Institucion {
 	Double presupuesto_institucion;
 	Date fecha_ingreso;
 	
+	
+	public Integer getIdInstitucion() {
+		return idInstitucion;
+	}
+	
 
 	
 	

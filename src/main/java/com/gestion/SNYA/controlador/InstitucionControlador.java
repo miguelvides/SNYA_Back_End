@@ -1,11 +1,17 @@
 package com.gestion.SNYA.controlador;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,4 +45,14 @@ public class InstitucionControlador {
 		
 		
 }
+	@DeleteMapping("/instituciones/{id}")
+	public ResponseEntity<Map<String, Boolean>> eliminarInstitucion(@PathVariable int id){
+		Institucion institucion = institucionServicio.buscarInstitucionporId(id);
+		this.institucionServicio.elimiarInstitucionporId(institucion.getIdInstitucion());
+		Map<String, Boolean> respuesta = new HashMap<>();
+		respuesta.put("eliminado", Boolean.TRUE);
+		
+		return ResponseEntity.ok(respuesta);
+		
+	}
 }
