@@ -23,9 +23,9 @@ public class InstitucionControlador {
 	@Autowired
 	private InstitucionRepositorio repositorio;
          @Autowired 
-    private InstitucionServicio servicio;
+         private InstitucionServicio servicio; 
         //http://localhost:8080/api/v1/institucion
-	@GetMapping("/institucion")
+         @GetMapping("/institucion")
 	public List<Institucion> listarTodasInstituciones() {
 		return repositorio.findAll();
 	}
