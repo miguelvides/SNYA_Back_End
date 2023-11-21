@@ -1,70 +1,92 @@
 package com.gestion.SNYA.modelo;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "actividades")
+
 public class Actividad {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private String nombre;
-    private LocalDate fecha;
-    private String lugar;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    public Actividad() {
-    }
+	@Column(name = "Identificador", length = 60, nullable = false)
+	private String Identificador;
+	@Column(name = "nombre", length = 60, nullable = false)
+	private String nombre;
+	@Column(name = "tipoActividad", length = 60, nullable = false)
+	private String tipoActividad;
+	@Column(name = "fecha", length = 60, nullable = false, unique = true)
+	private String fecha;
 
-    public Actividad(Long id, String nombre, LocalDate fecha, String lugar) {
-        this.id = id;
-        this.nombre = nombre;
-        this.fecha = fecha;
-        this.lugar = lugar;
-    }
+	public Actividad() {
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getFecha() {
+		return fecha;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public Actividad(long id, String nombre,String  fecha,String tipoActividad ) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.tipoActividad= tipoActividad;
+		this.fecha = fecha;	
+	}
 
-    public LocalDate getFecha() {
-        return this.fecha;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getLugar() {
-        return  this.lugar;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    @Override
+	public String getIdentificador() {
+		return Identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		Identificador = identificador;
+	}
+
+	public String getTipoActividad() {
+		return tipoActividad;
+	}
+
+	public void setTipoActividad(String tipoActividad) {
+		this.tipoActividad = tipoActividad;
+	}
+
+	@Override
     public String toString() {
         return "Actividad{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", fecha=" + fecha +
-                ", Lugar='" + lugar + '\'' +
+                ", tipoActividad=" + tipoActividad +
+                ", fecha='" + fecha + '\'' +
                 '}';
     }
 }
