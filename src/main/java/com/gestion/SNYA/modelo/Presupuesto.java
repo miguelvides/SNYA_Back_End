@@ -1,31 +1,77 @@
 package com.gestion.SNYA.modelo;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-@ToString
-@Data
+import jakarta.persistence.Table;
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-
-
-
+@Table(name = "presupuestos")
 public class Presupuesto {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Integer IdPresupuesto;
-	Integer cantidad;
-	String institucion;
-	String observacion; 
-	
-	
-	
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+    @Column(name = "cantidad", length = 60, nullable = false)
+	private String cantidad;
+	@Column(name = "institucion", length = 60, nullable = false)
+	private String institucion;
+	@Column(name = "observacion", length = 60, nullable = false)
+	private String observacion;
+
+    public long getId() {
+        return id;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public String getCantidad() {
+        return cantidad;
+    }
+
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
+
+
+    public String getInstitucion() {
+        return institucion;
+    }
+
+
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
+    }
+
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+
+    public Presupuesto(){
+
+    }
+
+    
+	public Presupuesto(long id, String cantidad,String institucion,String observacion ) {
+		super();
+		this.id = id;
+		this.cantidad= cantidad;
+		this.institucion=institucion;
+		this.observacion=observacion;
+	}
+
 
 }
+
