@@ -9,6 +9,7 @@ public interface IInstitucionServicio {
 	public Institucion buscarInstitucionporId(Integer idInstitucion );
 	public void guardarInstitucion(Institucion institucion);
 	public void elimiarInstitucionporId(Integer idInstitucion);
+	public Institucion obtenerInstitucionPorId(Integer id);
 	
 	
 

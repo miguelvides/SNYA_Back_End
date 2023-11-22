@@ -15,7 +15,7 @@ public class InstitucionServicio implements IInstitucionServicio{
 
 	
 	private InstitucionRepositorio institucionRepositorio;
-	
+		
 	public List<Institucion> listarInstituciones() {
 		return this.institucionRepositorio.findAll();
 		
@@ -31,8 +31,7 @@ public class InstitucionServicio implements IInstitucionServicio{
 
 	public void guardarInstitucion(Institucion institucion) {
 		this.institucionRepositorio.save(institucion);
-		
-		
+			
 		
 	}
 
@@ -40,6 +39,11 @@ public class InstitucionServicio implements IInstitucionServicio{
 		this.institucionRepositorio.deleteById(idInstitucion);
 		
 		
+	}
+	
+	public Institucion obtenerInstitucionPorId(Integer id) {
+	
+		return institucionRepositorio.findById(id).orElse(null);
 	}
 
 }
