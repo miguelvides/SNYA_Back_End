@@ -16,15 +16,19 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Actividad {
+
+
+
+public class Donante {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	Integer IdActividad; 
+	Integer idDoanante;
 	String nombre;
-	String donanteActividad;
-	Integer presupuestoActividad; 
-	Date fechaActividd; 
+	String institucion_donante;
+	String actividad_donante; 
+	Date fecha_inscripcion;
+	
 	
 
 }
