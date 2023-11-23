@@ -5,9 +5,9 @@ import com.gestion.SNYA.modelo.Actividad;
 import java.util.List;
 
 public interface IActividadServicio {
-    public List<Actividad> listar();
-    public Actividad buscarId(Integer id );
-    public Actividad guardar(Actividad actividad);
-    public void elimiarId(Integer id);
-    public Actividad obtenerPorId(Integer id);
+     List<Actividad> listar();
+     Actividad buscarId(Integer id );
+     Actividad guardar(Actividad actividad);
+     void elimiarId(Integer id);
+     Actividad obtenerPorId(Integer id);
 }
