@@ -36,7 +36,7 @@ public class InstitucionControlador {
 		List<Institucion> instituciones = this.institucionServicio.listarInstituciones();
 		logger.info("insttituciones Obtenidas: ");
 		instituciones.forEach((institucion->logger.info(institucion.toString())));
-		return instituciones; 
+		return instituciones;
 	}
 	
 }
