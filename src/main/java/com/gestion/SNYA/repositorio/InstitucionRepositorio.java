@@ -7,7 +7,7 @@ import com.gestion.SNYA.modelo.Institucion;
 
 @Repository
 
-public interface InstitucionRepositorio extends JpaRepository<Institucion, Long> {
+public interface InstitucionRepositorio extends JpaRepository<Institucion,Integer> {
 	
 
 }

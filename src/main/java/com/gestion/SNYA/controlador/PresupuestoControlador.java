@@ -1,13 +1,13 @@
 package com.gestion.SNYA.controlador;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,57 +15,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gestion.SNYA.excepciones.ResourceNotFoundException;
 import com.gestion.SNYA.modelo.Presupuesto;
-//import com.gestion.SNYA.repositorio.InstitucionRepositorio;
-import com.gestion.SNYA.repositorio.PresupuestoRepositorio;
+import com.gestion.SNYA.servicio.PresupuestoServicio;
 
 @RestController
-@RequestMapping("/api/v1/presupuesto")
-@CrossOrigin(origins ="http://localhost:4200")
+//http://locahost:8080/snya-ap
+@RequestMapping("snya-app")
+@CrossOrigin(value = "http://localhost:4200")
+
 public class PresupuestoControlador {
-
-	
-
-    final
-    PresupuestoRepositorio repositorio;
-
-    public PresupuestoControlador(PresupuestoRepositorio repositorio) {
-        this.repositorio = repositorio;
-    }
-
-    @GetMapping
-    public ResponseEntity<?> findAll(){
-        Map<String,Object> mensaje = new HashMap<>();
-        List<Presupuesto> presupuestos = repositorio.findAll();
-        if (presupuestos.isEmpty()){
-            mensaje.put("succes",Boolean.FALSE);
-            mensaje.put("Mensaje","No hay datos");
-            return ResponseEntity.ok().body(mensaje);
-        }
-        mensaje.put("succes",Boolean.TRUE);
-        mensaje.put("data",repositorio.findAll());
-        return ResponseEntity.ok().body(mensaje);
+    private static final Logger logger =
+    LoggerFactory.getLogger(PresupuestoControlador.class);
+    @Autowired
+    private PresupuestoServicio presupuestoServicioS;
+    //----------------------------------------------------------
+    @GetMapping("/getPresupuestos")
+    //Listar todos los presupuestos
+    public List<Presupuesto> obtenerAllPresupuesto(){
+        List<Presupuesto> presupuesto = this.presupuestoServicioS.listarPresupuestos();
+        logger.info("Presupuestos obtenidos");
+        presupuesto.forEach((presu->logger.info(presu.toString())));
+        return presupuesto;
     }
     
-    @PostMapping
-    public ResponseEntity<?> createActividad(@RequestBody Presupuesto presupuesto){
-        Map<String,Object> mensaje = new HashMap<>();
-        mensaje.put("succes",Boolean.TRUE);
-		mensaje.put("data",repositorio.save(presupuesto));
-        return ResponseEntity.ok().body(mensaje);
+    //-----------------------------------------------------------
+    //Buscar por id
+    @GetMapping("/presupuesto/{id}")
+    public ResponseEntity <Presupuesto> buscarPresupuestoID(
+        @PathVariable int id
+    ){
+        Presupuesto presupuestoPorID =this.presupuestoServicioS.buscarPrespuesto(id);
+        if(presupuestoPorID!=null){
+            return ResponseEntity.ok(presupuestoPorID);
+        }else{
+            throw new ResourceNotFoundException("Presupuesto no encontrado "+id);
+        }
     }
-
-
-	
+    //------------------------------------------------------------
+    //Actualizar 
     @PutMapping("/presupuesto/{id}")
-	public ResponseEntity<Presupuesto> actualizarPresupuesto(
-			@PathVariable (value = "id")Long PresupuestoId,
-			@RequestBody Presupuesto presupuestoDetalle){
-		Presupuesto presupuesto = repositorio.findById(PresupuestoId).orElseThrow(()-> new ResourceNotFoundException("Institucion no encontrada con el ID : "+PresupuestoId));
-		presupuesto.setCantidad(presupuestoDetalle.getCantidad());
-        presupuesto.setInstitucion(presupuestoDetalle.getInstitucion());
-        presupuesto.setObservacion(presupuestoDetalle.getObservacion());
-
-		Presupuesto presupuestoActualizada = repositorio.save(presupuesto);
-		return ResponseEntity.ok(presupuestoActualizada);
-	}
+    public ResponseEntity <Presupuesto> actualizarDatosPresupuesto
+    (@PathVariable int id,@RequestBody Presupuesto presup){
+        Presupuesto presupuestoAc =this.presupuestoServicioS.buscarPrespuesto(id);
+        presupuestoAc.setCantidad(presup.getCantidad());
+        presupuestoAc.setInstitucion(presup.getInstitucion());
+        presupuestoAc.setObservacion(presup.getObservacion());
+        this.presupuestoServicioS.guardarPresupuesto(presupuestoAc);
+        return ResponseEntity.ok(presupuestoAc);
+    }
 }
