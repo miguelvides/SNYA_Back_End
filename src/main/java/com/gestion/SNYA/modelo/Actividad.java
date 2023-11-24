@@ -1,89 +1,24 @@
 package com.gestion.SNYA.modelo;
-
-import jakarta.persistence.Column;
+import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 @Entity
-@Table(name = "actividades")
-
+@ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Actividad {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	@Column(name = "Identificador", length = 60, nullable = false)
-	private String Identificador;
-	@Column(name = "nombre", length = 60, nullable = false)
-	private String nombre;
-	@Column(name = "tipoActividad", length = 60, nullable = false)
-	private String tipoActividad;
-	@Column(name = "fecha", length = 60, nullable = false, unique = true)
-	private String fecha;
-
-	public Actividad() {
-
-	}
-
-	public String getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-	public Actividad(long id, String nombre,String  fecha,String tipoActividad ) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.tipoActividad= tipoActividad;
-		this.fecha = fecha;	
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getIdentificador() {
-		return Identificador;
-	}
-
-	public void setIdentificador(String identificador) {
-		Identificador = identificador;
-	}
-
-	public String getTipoActividad() {
-		return tipoActividad;
-	}
-
-	public void setTipoActividad(String tipoActividad) {
-		this.tipoActividad = tipoActividad;
-	}
-
-	@Override
-    public String toString() {
-        return "Actividad{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", tipoActividad=" + tipoActividad +
-                ", fecha='" + fecha + '\'' +
-                '}';
-    }
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	Integer IdActividad; 
+	String nombre;
+	String donanteActividad;
+	Integer presupuestoActividad; 
+	Date fechaActividd; 
 }
