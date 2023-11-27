@@ -20,7 +20,6 @@ import lombok.ToString;
 
 
 public class Donante {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer idDoanante;
@@ -28,7 +27,4 @@ public class Donante {
 	String institucion_donante;
 	String actividad_donante; 
 	Date fecha_inscripcion;
-	
-	
-
 }
