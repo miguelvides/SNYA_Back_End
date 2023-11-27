@@ -1,4 +1,5 @@
 package com.gestion.SNYA.modelo;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,12 +14,18 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+
+
+
 public class Presupuesto {
-    @Id
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer IdPresupuesto;
 	Integer cantidad;
 	String institucion;
 	String observacion; 
 	
+	
+	
+
 }
