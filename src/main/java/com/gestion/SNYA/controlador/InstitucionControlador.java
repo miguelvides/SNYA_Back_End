@@ -1,54 +1,38 @@
 package com.gestion.SNYA.controlador;
 
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.gestion.SNYA.Servicio.InstitucionServicio;
 import com.gestion.SNYA.modelo.Institucion;
-
-import com.gestion.SNYA.servicio.InstitucionServicio;
-
+import com.gestion.SNYA.repositorio.InstitucionRepositorio;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-//http://locahost:8080/snya-app
-@RequestMapping("snya-app")
-@CrossOrigin(value = "http://localhost:4200")
-//documentacion en http://localhost:8080/swagger-ui.html
+//http://localhost:8080
+@RequestMapping("/api/v1/")
+@CrossOrigin(origins ="http://localhost:4200")
 
 public class InstitucionControlador {
-	
-	private static final Logger logger= LoggerFactory.getLogger(InstitucionControlador.class);
-	
 	@Autowired
-	
-	private InstitucionServicio institucionServicio;
-	//http://localhost:8080/snya-app/instituciones
-	@GetMapping("/instituciones")
-	public List<Institucion>obtenerInstituciones(){
-		List<Institucion> instituciones = this.institucionServicio.listarInstituciones();
-		logger.info("insttituciones Obtenidas: ");
-		instituciones.forEach((institucion->logger.info(institucion.toString())));
-		return instituciones;
-    }
-
-	@PutMapping("/institucion/{id}")
-	public ResponseEntity<?> actualizarInstitucion(
-			@PathVariable(value = "id") Integer institucionId,
-			@RequestBody Institucion institucionJson){
-		Institucion institucion=institucionServicio.buscarInstitucionporId(institucionId);
-		if(institucion==null){
-			return new ResponseEntity<>("institucion no encontrada", HttpStatus.NOT_FOUND);
-		}
-		institucion.setNombre(institucionJson.getNombre());
-		institucion.setPresupuesto_institucion(institucionJson.getPresupuesto_institucion());
-		institucion.setTipo_institucion(institucionJson.getTipo_institucion());
-		institucion.setFecha_ingreso(institucion.getFecha_ingreso());//format YYYY-MM-DD
-		institucionServicio.guardarInstitucion(institucion);
-		return ResponseEntity.ok(institucion);
+	private InstitucionRepositorio repositorio;
+         @Autowired 
+         private InstitucionServicio servicio; 
+        //http://localhost:8080/api/v1/institucion
+         @GetMapping("/institucion")
+	public List<Institucion> listarTodasInstituciones() {
+		return repositorio.findAll();
 	}
+        
+        @PostMapping("/institucion")   
+    public Institucion guardarInstitucion(@RequestBody Institucion institucion){
+		
+        return this.servicio.guardarInstitucion(institucion);
+	}  
 }
